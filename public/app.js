@@ -1,7 +1,7 @@
 var scraped = false;
 
 // Grab the articles as a json
-$.getJSON("/articles", function(data) {
+$.getJSON("/", function(data) {
   // For each one
   $("#articles").empty();
   for (var i = 0; i < data.length; i++) {
