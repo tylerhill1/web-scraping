@@ -1,13 +1,35 @@
+var scraped = false;
+
 // Grab the articles as a json
 $.getJSON("/articles", function(data) {
   // For each one
   $("#articles").empty();
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#articles").append("<a href='" + data[i].link + "'>" + "<p data-id='" + data[i]._id + "'>" + data[i].title + "</p></a><p>" + data[i].description + "<a href='" +  data[i].link + "'><br><br><img src='" + data[i].photo + "'>");
+    $("#articles").append("<a href='https://www.nytimes.com" + data[i].link + "'>" + data[i].title + "</a><p data-id='" + data[i]._id + "'>" + data[i].description + "</p><a href='https://www.nytimes.com" + data[i].link + "'><img src='" + data[i].photo + "'></img><br><br>");
   }
 });
 
+// $("#articles").append("<a href='" + data[i].link + "'>" + "<p data-id='" + data[i]._id + "'>" + data[i].title + "</p></a><p>" + data[i].description + "<a href='" +  data[i].link + "'><br><br><img src='" + data[i].photo + "'>");
+
+$("#scrape").on("click", function() {
+  $.ajax({
+    method: "GET",
+    url: "/scrape"
+  })
+  .then(function() {
+
+    $.getJSON("/articles", function(data) {
+      // For each one
+      $("#articles").empty();
+      for (var i = 0; i < data.length; i++) {
+        // Display the apropos information on the page
+        $("#articles").append("<a href='https://www.nytimes.com" + data[i].link + "'>" + data[i].title + "</a><p data-id='" + data[i]._id + "'>" + data[i].description + "</p><a href='https://www.nytimes.com" + data[i].link + "'><img src='" + data[i].photo + "'></img><br><br>");
+      }
+
+    });
+  })
+});
 
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
