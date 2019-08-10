@@ -81,9 +81,9 @@ app.get("/scrape", function(req, res) {
   });
 });
 
-app.get("/", function(req, res) {
-  res.json(path.join(__dirname, "public/index.html"));
-});
+// app.get("/", function(req, res) {
+//   res.json(path.join(__dirname, "public/index.html"));
+// });
 
 
 // Route for getting all Articles from the db
